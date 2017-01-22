@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import {ReviewList} from 'components'
+import React, {Component} from 'react'
 import {StyleSheet, css} from 'aphrodite'
 
 const styles = StyleSheet.create({
   container: {
+    border: '1px solid black',
+    width: '700px'
   }
 })
 
-class App extends Component {
+export default class ReviewPopover extends Component {
   render() {
     return (
       <div className={css(styles.container)}>
-        <ReviewList />
+        REVIEW
       </div>
-    );
+    )
   }
 }
-
-export default App;
