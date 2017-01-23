@@ -2,14 +2,18 @@ import React, {Component} from 'react'
 import {reviewService} from 'services'
 import ReviewItem from './review-item'
 import ReviewSummary from './review-summary'
+import FilterControls from './filter-controls'
 import {StyleSheet, css} from 'aphrodite'
+import update from 'immutability-helper'
 
 const styles = StyleSheet.create({
   container: {
     width: '100%'
   },
   table: {
-    width: '100%'
+    width: '100%',
+    border: '1px solid black',
+    borderCollapse: 'collapse'
   }
 })
 
@@ -18,7 +22,11 @@ export default class ReviewList extends Component {
     super()
     this.state = {
       reviews: [],
-      selectedReview: null
+      selectedReview: null,
+      sort: {
+        field: 'author',
+        ascending: true
+      }
     }
   }
   async componentDidMount() {
@@ -28,11 +36,20 @@ export default class ReviewList extends Component {
   itemSelected({id}) {
     this.setState({selectedReview: id})
   }
+  handleFilterChange({field}) {
+    if (this.state.sort.field === field) this.setState(update(this.state, {sort: {ascending: {$set: !this.state.sort.ascending}}}))
+    else this.setState(update(this.state, {sort: {field: {$set: field}}}))
+  }
   renderLoading() {
     return <h3>Loading...</h3>
   }
   renderList(reviews) {
-    const rows = reviews.reduce((final, review) => {
+    const rows = reviews
+      .sort((a, b) => {
+        if (this.state.sort.ascending) return  a[this.state.sort.field] > b[this.state.sort.field] ? 1 : -1
+        else return a[this.state.sort.field] > b[this.state.sort.field] ? -1 : 1
+      })
+      .reduce((final, review) => {
         final.push(<ReviewItem 
           onClick={this.itemSelected.bind(this, review)} 
           key={review.id} {...review} 
@@ -45,8 +62,9 @@ export default class ReviewList extends Component {
     return (
       <div>
         <h2>Reviews</h2> 
-        <table className={css(styles.table)}>
+        <table className={css(styles.table) + ' review-table'}>
           <tbody>
+            <FilterControls sort={this.state.sort.field} ascending={this.state.sort.ascending} onFiltersChanged={this.handleFilterChange.bind(this)} />
             {rows}
           </tbody>
         </table>
@@ -57,7 +75,7 @@ export default class ReviewList extends Component {
     return (
       <div className={css(styles.container)}>
         {this.state.reviews.length ?
-          this.renderList(this.state.reviews) :
+          this.renderList.call(this, this.state.reviews) :
           this.renderLoading()}
       </div>
     )

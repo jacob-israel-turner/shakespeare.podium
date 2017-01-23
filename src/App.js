@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {ReviewList} from 'components'
 import {StyleSheet, css} from 'aphrodite'
 
+import './App.css'
+
 const styles = StyleSheet.create({
   container: {
   }
