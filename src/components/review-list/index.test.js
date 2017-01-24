@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ReviewList from './index';
 import {StyleSheetTestUtils} from 'aphrodite';
 
 beforeEach(() => {
@@ -11,9 +11,9 @@ afterEach(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
-describe('Shakespeare', () => {
+describe('<ReviewList />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<ReviewList />, div);
   });
 })
