@@ -18,7 +18,6 @@ export default class ReviewSummary extends Component{
   }
   async componentDidMount() {
     const {body: summary} = await getReviewSummary(this.props.id)
-    console.log(summary)
     this.setState({summary})
   }
   render() {

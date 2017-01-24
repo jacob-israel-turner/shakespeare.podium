@@ -37,8 +37,8 @@ export default class ReviewList extends Component {
     this.setState({selectedReview: id})
   }
   handleFilterChange({field}) {
-    if (this.state.sort.field === field) this.setState(update(this.state, {sort: {ascending: {$set: !this.state.sort.ascending}}}))
-    else this.setState(update(this.state, {sort: {field: {$set: field}}}))
+    if (this.state.sort.field === field) this.setState(update(this.state, {selectedReview: {$set: null}, sort: {ascending: {$set: !this.state.sort.ascending}}}))
+    else this.setState(update(this.state, {selectedReview: {$set: null}, sort: {field: {$set: field}}}))
   }
   renderLoading() {
     return <h3>Loading...</h3>
