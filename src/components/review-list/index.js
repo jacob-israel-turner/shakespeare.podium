@@ -13,8 +13,11 @@ const styles = StyleSheet.create({
   },
   table: {
     width: '100%',
-    border: '1px solid black',
     borderCollapse: 'collapse'
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
@@ -62,7 +65,6 @@ export default class ReviewList extends Component {
     }, [])
     return (
       <div>
-        <h2>{prettify(constants.customerName)}'s Reviews</h2>
         <table className={css(styles.table) + ' review-table'}>
           <tbody>
             <FilterControls sort={this.state.sort.field} ascending={this.state.sort.ascending} onFiltersChanged={this.handleFilterChange.bind(this)} />
@@ -75,6 +77,7 @@ export default class ReviewList extends Component {
   render() {
     return (
       <div className={css(styles.container)}>
+        <h2 className={css(styles.header)}>{prettify(constants.customerName)}'s Reviews</h2>
         {this.state.reviews.length ?
           this.renderList.call(this, this.state.reviews) :
           this.renderLoading()}
