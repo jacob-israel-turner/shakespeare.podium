@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {reviewService} from 'services'
+import {reviewService, constants} from 'services'
 import ReviewItem from './review-item'
 import ReviewSummary from './review-summary'
 import FilterControls from './filter-controls'
@@ -8,7 +8,8 @@ import update from 'immutability-helper'
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%'
+    width: '100%',
+    padding: 15
   },
   table: {
     width: '100%',
@@ -61,7 +62,7 @@ export default class ReviewList extends Component {
     }, [])
     return (
       <div>
-        <h2>Reviews</h2> 
+        <h2>{prettify(constants.customerName)}'s Reviews</h2>
         <table className={css(styles.table) + ' review-table'}>
           <tbody>
             <FilterControls sort={this.state.sort.field} ascending={this.state.sort.ascending} onFiltersChanged={this.handleFilterChange.bind(this)} />
@@ -80,4 +81,8 @@ export default class ReviewList extends Component {
       </div>
     )
   }
+}
+
+function prettify(str) {
+  return `${str.substring(0, 1).toUpperCase()}${str.substring(1)}`
 }
