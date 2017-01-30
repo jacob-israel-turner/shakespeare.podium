@@ -1,0 +1,15 @@
+exports[`<ReviewItem /> renders without crashing 1`] = `
+<tr
+  className="container_120drhm"
+  onClick={[Function]}>
+  <td>
+    Jacob Turner
+  </td>
+  <td>
+    4.3
+  </td>
+  <td>
+    01/12/2017
+  </td>
+</tr>
+`;

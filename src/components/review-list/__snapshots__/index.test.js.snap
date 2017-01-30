@@ -1,0 +1,8 @@
+exports[`<ReviewList /> renders without crashing 1`] = `
+<div
+  className="container_py3uvl">
+  <h3>
+    Loading...
+  </h3>
+</div>
+`;

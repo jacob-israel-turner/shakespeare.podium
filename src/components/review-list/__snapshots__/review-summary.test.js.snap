@@ -1,0 +1,8 @@
+exports[`<ReviewSummary /> renders without crashing 1`] = `
+<tr
+  className="container_120drhm">
+  <td>
+    LOADING
+  </td>
+</tr>
+`;
